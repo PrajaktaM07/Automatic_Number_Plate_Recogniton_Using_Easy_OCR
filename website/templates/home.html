@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block title %}Car details{% endblock %} {% block content %}
+    <h1>Notes</h1>
+    <ul class="list-group list-group-flush" id="notes">
+    </ul>
+    <form method="POST" enctype=multipart/form-data>
+      <input type="file" name="photo" id="photo">
+      <input type="submit" value="Submit">
+    </form>
+{% endblock %}
