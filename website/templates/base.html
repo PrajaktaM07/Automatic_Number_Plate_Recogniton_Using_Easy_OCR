@@ -14,11 +14,13 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="/static/main.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     <title>{% block title %}Home{% endblock %}</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #712CF9;">
       <button
         class="navbar-toggler"
         type="button"
@@ -69,18 +71,62 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 {% block javascript %}
-    <script type="text/javascript">
-      function deleteNote(noteId) {
-        fetch("/delete-note", {
-            method: "POST",
-            body: JSON.stringify({ noteId: noteId }),
-            }).then((_res) => {
-            window.location.href = "/";
-        });
-    }
-    </script>
+<script type="text/javascript">
+    document.getElementById('photo').addEventListener('change', function(e) {
+      if (e.target.files[0]) {
+        let dragContainer = document.getElementById("drag-drop-container");
+        dragContainer.innerHTML = "";
+        let imgElement = document.createElement('img');
+        imgElement.classList.add('img-preview');
+        // imgElement.src = e.target.files[0].name;
+        dragContainer.appendChild(imgElement);
+        
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          imgElement.src = e.target.result;
+          localStorage.setItem('car-photo', e.target.result)
+          Toastify({
+            text: "Image uploaded",
+            duration: 3000,
+            close: true,
+            gravity: "bottom", // `top` or `bottom`
+            position: "center", 
+            // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "rgba(113, 44, 249, 0.2)",
+              border: "1px solid rgba(113, 44, 249, 1)",
+              color: "rgba(113, 44, 249, 1)"
+            },
+          }).showToast();
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    });
+
+    let dragDropContainer = document.getElementById("drag-drop-container");
+    dragDropContainer.addEventListener('dragover', () => {
+      dragDropContainer.classList.add('hover');
+    })
+    dragDropContainer.addEventListener('dragleave', () => {
+      dragDropContainer.classList.remove('hover');
+    })
+    dragDropContainer.addEventListener('drop', (e) => {
+      e.preventDefault();
+      let image = e.datTransfer.files[0];
+      let type = image.type;
+      
+      if(type == "image/jpg" || type == "image/jpeg" || type=="image/png") {
+        uploadImage(image);
+      }
+      else {
+        return;
+      }
+    })
+  </script>
     {% endblock %}
   </body>
 </html>

@@ -1,5 +1,79 @@
 {% extends "base.html" %} {% block title %}Results{% endblock %} {% block content
     %}
-<h4>{{ details.result.extraction_output.registration_number }}</h4>
-<h5>{{ details.result.extraction_output.owner_name }}</h5>
+<div class="main-container">
+    <div class="left">
+        <div class="number-plate field">
+            <div class="label">Number plate</div>
+            <div class="value">{{ details.number_plate }}</div>
+        </div>
+        <div class="field">
+            <div class="label">Owner name</div>
+            <div class="value">{{ details.owner_name }}</div>
+        </div>
+        
+        <div class="field">
+            <div class="label">Region</div>
+            <div class="value">{{ details.region }}</div>
+        </div>
+        
+        <div class="field">
+            <div class="label">Model</div>
+            <div class="value">{{ details.model }}</div>
+        </div>
+        
+        <div class="field">
+            <div class="label">Make</div>
+            <div class="value">{{ details.make }}</div>
+        </div>
+        <div class="field">
+            <div class="label">Color</div>
+            <div class="value">{{ details.color }}</div>
+        </div>
+        <div class="field">
+            <div class="label">Vehicle type</div>
+            <div class="value">{{details.vehicle_type}}</div>
+        </div>
+        <div class="field">
+            <div class="label">Orientation</div>
+            <div class="value">{{ details.orientation }}</div>
+        </div>
+        <div class="field">
+            <div class="label">Registration date</div>
+            <div class="value">{{ details.registration_date }}</div>
+        </div>
+        <div class="field puc-section">
+            <div class="label">PUC Details</div>
+        </div>
+        <div class="field">
+            <div class="label">PUC Upto</div>
+            <div class="value">{{ details.puc_number_upto }}</div>
+        </div>        
+        <div class="field">
+            <div class="label">Chassis number</div>
+            <div class="value">{{ details.chassis_number }}</div>
+        </div> 
+        <div class="field">
+            <div class="label">Emission norms</div>
+            <div class="value">{{ details.emmisson_norms }}</div>
+        </div> 
+        <div class="field">
+            <div class="label">Fuel type</div>
+            <div class="value">{{ details.fuel_type }}</div>
+        </div> 
+    </div>
+    <div class="right">
+        <img width="300" height="300" id="result-photo-img">
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    function loadImage() {
+        document.getElementById("result-photo-img").src=localStorage.getItem('car-photo');
+    }
+    setTimeout(loadImage)
+</script>
+
 {% endblock %}

@@ -119,7 +119,6 @@ def get_np_text(filename):
     return dummy_response
         
 
-
 def get_car_details(number):
     url = "https://vehicle-rc-verification.p.rapidapi.com/v3/tasks/sync/verify_with_source/ind_rc_basic"
     payload = {
@@ -246,7 +245,7 @@ def read_text(filename):
         # get_np_text(filename)
         plate_details = get_np_text(filename)
         plate = plate_details['results'][0]['plate']
-        print("plate:", plate)
-        details = get_car_details(plate)
-        return details
+        plate = plate.upper()
+        
+        return plate
 
