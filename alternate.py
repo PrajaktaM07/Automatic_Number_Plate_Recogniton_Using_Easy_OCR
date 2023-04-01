@@ -81,42 +81,42 @@ token = '7973d5e87688470071665d71849f8a58cd599c3e'
 def get_np_text(filename):
     # pip install requests 
     regions = ['in'] # Change to your country
-    # with open(filename, 'rb') as fp:
-    #     response = requests.post(
-    #         'https://api.platerecognizer.com/v1/plate-reader/',
-    #         data=dict(regions=regions),  # Optional
-    #         files=dict(upload=fp),
-    #         headers={'Authorization': 'Token ' + token})
-    # pprint(response.json())
-    # return response.json()
-    dummy_response = {
-            'camera_id': None,
-            'filename': '0719_BcbhL_1.jpg',
-            'processing_time': 59.075,
-            'results': [
-                {
-                    'box': {'xmax': 865, 'xmin': 341, 'ymax': 1524, 'ymin': 1414},
-                    'candidates': [{'plate': 'mh46bk4291', 'score': 0.904}],
-                    'dscore': 0.894,
-                    'plate': 'mh46bk4291',
-                    'region': {'code': 'in', 'score': 0.879},
-                    'score': 0.904,
-                    'vehicle': {
-                        'box': {
-                            'xmax': 1200,   
-                            'xmin': 0,
-                            'ymax': 1593,
-                            'ymin': 460
-                        },
-                        'score': 0.647,
-                        'type': 'Sedan'
-                    }
-                }
-            ],
-            'timestamp': '2023-03-26T07:19:35.474212Z',
-            'version': 1
-        }
-    return dummy_response
+    with open(filename, 'rb') as fp:
+        response = requests.post(
+            'https://api.platerecognizer.com/v1/plate-reader/',
+            data=dict(regions=regions),  # Optional
+            files=dict(upload=fp),
+            headers={'Authorization': 'Token ' + token})
+    pprint(response.json())
+    return response.json()
+    # dummy_response = {
+    #         'camera_id': None,
+    #         'filename': '0719_BcbhL_1.jpg',
+    #         'processing_time': 59.075,
+    #         'results': [
+    #             {
+    #                 'box': {'xmax': 865, 'xmin': 341, 'ymax': 1524, 'ymin': 1414},
+    #                 'candidates': [{'plate': 'mh46bk4291', 'score': 0.904}],
+    #                 'dscore': 0.894,
+    #                 'plate': 'mh46bk4291',
+    #                 'region': {'code': 'in', 'score': 0.879},
+    #                 'score': 0.904,
+    #                 'vehicle': {
+    #                     'box': {
+    #                         'xmax': 1200,   
+    #                         'xmin': 0,
+    #                         'ymax': 1593,
+    #                         'ymin': 460
+    #                     },
+    #                     'score': 0.647,
+    #                     'type': 'Sedan'
+    #                 }
+    #             }
+    #         ],
+    #         'timestamp': '2023-03-26T07:19:35.474212Z',
+    #         'version': 1
+    #     }
+    # return dummy_response
         
 
 def get_car_details(number):
@@ -131,51 +131,51 @@ def get_car_details(number):
         "X-RapidAPI-Key": "91bdf66265msh281f2e86c0f57cap11446fjsnf3bffef2e0a6",
         "X-RapidAPI-Host": "vehicle-rc-verification.p.rapidapi.com"
     }
-    # response = requests.request("POST", url, json=payload, headers=headers)
+    response = requests.request("POST", url, json=payload, headers=headers)
     # pprint(response.json())
     # print(response.text)
-    dummy_details_repsonse = {
-            'action': 'verify_with_source',
-            'completed_at': '2023-03-26T13:33:15+05:30',
-            'created_at': '2023-03-26T13:33:15+05:30',
-            'group_id': '8e16424a-58fc-4ba4-ab20-5bc8e7c3c41e',
-            'request_id': 'bfd465a8-2f17-49fa-a0d5-394b3496e0e3',
-            'result': {
-                'extraction_output': {
-                        'avg_gross_vehicle_weight': '1315',
-                        'axle_configuration': None,
-                        'chassis_number': 'MBHCZC63SJK2XXXXX',
-                        'color': None,
-                        'emission_norms': 'BHARAT STAGE IV',
-                        'engine_number': None,
-                        'fitness_upto': '2034-01-29',
-                        'fuel_type': 'PETROL',
-                        'insurance_details': None,
-                        'insurance_validity': '2024-01-23',
-                        'maker_model': 'MARUTI SWIFT ZXI+',
-                        'manufacturer': 'MARUTI SUZUKI INDIA LTD',
-                        'mv_tax_upto': None,
-                        'owner_name': 'PRABODH NARAYAN TANDON',
-                        'owner_number': None,
-                        'permit_issue_date': None,
-                        'permit_number': None,
-                        'permit_type': None,
-                        'permit_validity': None,
-                        'puc_number_upto': '2024-03-09',
-                        'registration_date': '2019-01-30',
-                        'registration_number': 'MH46BK4291',
-                        'rto_name': None,
-                        'status': 'id_found',
-                        'unladen_weight': '880',
-                        'vehicle_class': 'LMV',
-                        'vehicle_financier': None
-                    }
-                },
-            'status': 'completed',
-            'task_id': '74f4c926-250c-43ca-9c53-453e87ceacd1',
-            'type': 'ind_rc_basic'
-        }
-    return dummy_details_repsonse
+    # dummy_details_repsonse = {
+        #     'action': 'verify_with_source',
+        #     'completed_at': '2023-03-26T13:33:15+05:30',
+        #     'created_at': '2023-03-26T13:33:15+05:30',
+        #     'group_id': '8e16424a-58fc-4ba4-ab20-5bc8e7c3c41e',
+        #     'request_id': 'bfd465a8-2f17-49fa-a0d5-394b3496e0e3',
+        #     'result': {
+        #         'extraction_output': {
+        #                 'avg_gross_vehicle_weight': '1315',
+        #                 'axle_configuration': None,
+        #                 'chassis_number': 'MBHCZC63SJK2XXXXX',
+        #                 'color': None,
+        #                 'emission_norms': 'BHARAT STAGE IV',
+        #                 'engine_number': None,
+        #                 'fitness_upto': '2034-01-29',
+        #                 'fuel_type': 'PETROL',
+        #                 'insurance_details': None,
+        #                 'insurance_validity': '2024-01-23',
+        #                 'maker_model': 'MARUTI SWIFT ZXI+',
+        #                 'manufacturer': 'MARUTI SUZUKI INDIA LTD',
+        #                 'mv_tax_upto': None,
+        #                 'owner_name': 'PRABODH NARAYAN TANDON',
+        #                 'owner_number': None,
+        #                 'permit_issue_date': None,
+        #                 'permit_number': None,
+        #                 'permit_type': None,
+        #                 'permit_validity': None,
+        #                 'puc_number_upto': '2024-03-09',
+        #                 'registration_date': '2019-01-30',
+        #                 'registration_number': 'MH46BK4291',
+        #                 'rto_name': None,
+        #                 'status': 'id_found',
+        #                 'unladen_weight': '880',
+        #                 'vehicle_class': 'LMV',
+        #                 'vehicle_financier': None
+        #             }
+        #         },
+        #     'status': 'completed',
+        #     'task_id': '74f4c926-250c-43ca-9c53-453e87ceacd1',
+        #     'type': 'ind_rc_basic'
+        # }
+    return response.json()
 
 def read_text(filename):
     try:

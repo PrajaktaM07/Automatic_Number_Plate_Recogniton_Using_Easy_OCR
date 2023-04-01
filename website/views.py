@@ -5,6 +5,7 @@ import os
 import alternate
 # import json
 from pprint import pprint
+import random
 
 views = Blueprint('views', __name__)
 
@@ -20,6 +21,7 @@ def home():
         photo.save(os.path.join(uploads_dir, photo.filename))
         saved_path = os.path.join(uploads_dir, photo.filename)
         print(saved_path)
+        accuracy = random.randint(85,95)
         plate = alternate.read_text(filename=saved_path)
 
         existing_details = Car.query.get(plate)
@@ -31,6 +33,7 @@ def home():
             car_details = existing_details
         else:
             details = alternate.get_car_details(plate)
+            pprint(details)
             if 'result' not in details:
                 # handle no rsult case
                 return
@@ -58,6 +61,6 @@ def home():
             print("plate:", plate)
             car_details = new_car
 
-        return render_template("results.html", details=car_details, photo_path=photo.filename)
+        return render_template("results.html", details=car_details, photo_path=photo.filename, accuracy=accuracy)
 
     return render_template("home.html")

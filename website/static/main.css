@@ -102,9 +102,11 @@
   .right{
     width: 40%;
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
+    gap: 1rem;
   }
   .number-plate{
     grid-column: 1/ span 2;
@@ -132,6 +134,13 @@
     color: #424242;
   }
 
+  .accuracy{
+    margin: 0 auto;
+    font-size: 1.3rem;
+    color: #712CF9;
+    font-weight: 600;
+  }
+
   .value{
     background-color: #e9f1f7;
     color:rgba(113, 44, 249);
@@ -140,8 +149,8 @@
   }
 
   #result-photo-img{
-    height: 400px;
-    width: auto;
+    height: auto;
+    width: 100%;
   }
 
   .puc-section{
